@@ -1,5 +1,8 @@
 FROM ubuntu:18.04
 
+WORKDIR /usr/src/app
+
+# Java
 RUN apt update && apt -y upgrade &&\
     apt -y install software-properties-common &&\
     add-apt-repository ppa:linuxuprising/java &&\
@@ -8,7 +11,14 @@ RUN apt update && apt -y upgrade &&\
     apt install -y oracle-java13-installer &&\
     apt install oracle-java13-set-default
 
-WORKDIR /usr/src/app
 COPY spring-service/target/spring-service-0.0.1.jar spring-service.jar
+RUN java -version
+COPY run-services.sh run-services.sh
 
-ENTRYPOINT ["java", "-jar", "spring-service.jar"]
+# Python
+ADD flask-service flask-service
+RUN apt install -y python3-pip &&\
+    pip3 install flask &&\
+    pip3 install gunicorn
+
+CMD bash run-services.sh
