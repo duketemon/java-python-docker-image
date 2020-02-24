@@ -1,4 +1,4 @@
-FROM duketemon/java-python:1.0.0
+FROM duketemon/java-python:1.0.1
 
 WORKDIR /usr/src/app
 COPY spring-service/target/spring-service-0.0.1.jar spring-service.jar
