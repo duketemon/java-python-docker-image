@@ -1,1 +1,1 @@
-# java-python-docker-image
+![Project's logo](resources/logo.png)
